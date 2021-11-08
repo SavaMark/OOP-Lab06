@@ -1,7 +1,10 @@
 package it.unibo.oop.lab.collections2;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -76,16 +79,27 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
 
     @Override
     public boolean addFollowedUser(final String circle, final U user) {
-        return false;
+        Set<U> circleFriends = this.friends.get(circle);  //non clona, crea riferimento! 
+        if(circleFriends == null) {
+        	circleFriends = new HashSet<>();
+        	this.friends.put(circle, circleFriends);
+        }
+        return circleFriends.add(user);
     }
 
     @Override
     public Collection<U> getFollowedUsersInGroup(final String groupName) {
-        return null;
+        final Collection<U> followedUsers = this.friends.get(groupName); //metodo ritorna coll quindi crea una coll
+        if (followedUsers != null) {
+        	return new ArrayList<U>(followedUsers); //HashSet andava bene ugualmente?
+        }
+        
+        return Collections.emptyList();
     }
 
     @Override
     public List<U> getFollowedUsers() {
+        Set<U> friends = new HashSet<>();
         return null;
     }
 
