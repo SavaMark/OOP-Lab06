@@ -99,8 +99,14 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
 
     @Override
     public List<U> getFollowedUsers() {
-        Set<U> friends = new HashSet<>();
-        return null;
+        Set<U> followedUsers = new HashSet<>();
+        if(this.friends == null) {
+        	return Collections.emptyList();
+        }
+        for (var entry : this.friends.entrySet()) {
+    	    followedUsers.addAll(entry.getValue());
+    	}
+        return new ArrayList<>(followedUsers);
     }
 
 }
