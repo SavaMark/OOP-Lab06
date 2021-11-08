@@ -13,6 +13,13 @@ import java.util.Map;
  */
 public final class UseCollection {
 	
+	private static final long AFRICA = 1_110_635_000;
+	private static final long AMERICAS = 972_005_000;
+	private static final long ANTARCTICA = 0;
+	private static final long ASIA = 4_298_723_000L;
+	private static final long EUROPE = 742_452_000;
+	private static final long OCEANIA = 38_304_000;
+	
 	private static final int TIMES = 1000;
 	private static final int TO_MS = 1_000_000;
 	private static final int RANGE_MIN = 1000;
@@ -110,10 +117,20 @@ public final class UseCollection {
          * 
          */
     	
-    	final Map<String, Integer> map = new HashMap<String, Integer>();
-    	map.put("Africa", 1_110_635_000);
-    	map.put("Americas", 972_005_000);
-    	map.put("Antarctica", 0);
+    	long population = 0;
+    	final Map<String, Long> map = new HashMap<String, Long>();
+    	map.put("Africa", AFRICA);
+    	map.put("Americas", AMERICAS);
+    	map.put("Antarctica", ANTARCTICA);
+    	map.put("Asia", ASIA);
+    	map.put("Europe", EUROPE);
+    	map.put("Oceania", OCEANIA);
+    	
+    	for (var entry : map.entrySet()) {
+    	    population += entry.getValue();
+    	}
+    	
+    	System.out.println(population);
     	
         /*
          * 7) Build a new Map that associates to each continent's name its
